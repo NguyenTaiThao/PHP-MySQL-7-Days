@@ -1,3 +1,22 @@
+<?php
+	session_start();
+	include_once("../config/connect.php");
+	if(isset($_POST['sbm'])){
+		$user_mail = $_POST['mail'];
+		$user_pass = $_POST['pass'];
+		$sql = "SELECT * FROM user WHERE user_mail='$user_mail' AND user_pass='$user_pass'";
+		$query = mysqli_query($con, $sql);
+		if(mysqli_num_rows($query)>0){
+			$_SESSION['user_mail'] = $user_mail;
+			$_SESSION['user_pass'] = $user_pass;
+			$row = mysqli_fetch_assoc($query);
+			$_SESSION['user_full'] = $row['user_full'];
+			header('location:index.php');
+		}else{
+			$error = '<div class="alert alert-danger">Tài khoản không hợp lệ !</div>';
+		}
+	}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,7 +43,7 @@
 			<div class="login-panel panel panel-default">
 				<div class="panel-heading">Vietpro Mobile Shop - Administrator</div>
 				<div class="panel-body">
-					<div class="alert alert-danger">Tài khoản không hợp lệ !</div>
+					<?php if(isset($error)) echo $error; ?>
 					<form role="form" method="post">
 						<fieldset>
 							<div class="form-group">
@@ -38,7 +57,7 @@
 									<input name="remember" type="checkbox" value="Remember Me">Nhớ tài khoản
 								</label>
 							</div>
-							<button type="submit" class="btn btn-primary">Đăng nhập</button>
+							<button type="submit" class="btn btn-primary" name="sbm">Đăng nhập</button>
 						</fieldset>
 					</form>
 				</div>

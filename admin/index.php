@@ -1,6 +1,13 @@
+<?php
+    session_start();
+    include_once('../config/connect.php');
+    if(!isset($_SESSION['user_mail']) && !isset($_SESSION['user_pass'])){
+        header("location:login.php");
+    }
+    define('SECURITY',1);
+?>
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -40,12 +47,12 @@
                     <li class="dropdown pull-right">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><svg class="glyph stroked male-user">
                                 <use xlink:href="#stroked-male-user"></use>
-                            </svg> Admin <span class="caret"></span></a>
+                            </svg> <?php echo $_SESSION['user_full'];?><span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="#"><svg class="glyph stroked male-user">
                                         <use xlink:href="#stroked-male-user"></use>
                                     </svg> Hồ sơ</a></li>
-                            <li><a href="#"><svg class="glyph stroked cancel">
+                            <li><a href="logout.php"><svg class="glyph stroked cancel">
                                         <use xlink:href="#stroked-cancel"></use>
                                     </svg> Đăng xuất</a></li>
                         </ul>
