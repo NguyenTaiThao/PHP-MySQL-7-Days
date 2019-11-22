@@ -1,6 +1,36 @@
 <?php
+    
     if(!defined('SECURITY')){
         header("location:index.php");
+    }
+    $sql = "SELECT * FROM category ORDER BY cat_id ASC";
+    $query = mysqli_query($con,$sql);
+    if(isset($_POST['sbm'])){
+        $cat_id = $_POST['cat_id'];
+        $prd_name = $_POST['prd_name'];
+        $prd_price = $_POST['prd_price'];
+        $prd_warranty = $_POST['prd_warranty'];
+        $prd_accessories = $_POST['prd_accessories'];
+        $prd_new = $_POST['prd_new'];
+        $prd_promotion = $_POST['prd_promotion'];
+        $prd_status = $_POST['prd_status'];
+        $prd_details = $_POST['prd_details'];
+        if(isset($_POST['prd_featured']))
+            $prd_featured = $_POST['prd_featured'];
+        else{
+            $prd_featured = 0;
+        }
+        $prd_image = $_FILES['prd_image']['name'];
+        $tmp_name = $_FILES['prd_image']['tmp_name'];
+        
+        $sql = "INSERT INTO product(prd_name, prd_price, prd_warranty, prd_accessories, 
+            prd_promotion, prd_new, prd_image, cat_id, prd_status, prd_featured, prd_details)
+			VALUES('$prd_name', '$prd_price', '$prd_warranty', '$prd_accessories', 
+            '$prd_promotion', '$prd_new', '$prd_image', '$cat_id', '$prd_status', 
+            '$prd_featured', '$prd_details')";
+        mysqli_query($con, $sql);
+        move_uploaded_file($tmp_name,"img/products/".$prd_image);
+        header("location:index.php?page_layout=product");
     }
 ?>
 	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">			
@@ -63,10 +93,9 @@
                                 <div class="form-group">
                                     <label>Danh mục</label>
                                     <select name="cat_id" class="form-control">
-                                        <option value=1>iPhone</option>
-                                        <option value=2>Samsung</option>
-                                        <option value=3>Nokia</option>
-                                        <option value=4>LG</option>
+                                    <?php while($row = mysqli_fetch_assoc($query)){?>
+                                        <option value=<?php echo $row['cat_id']?>><?php echo $row['cat_name']?></option>
+                                    <?php } ?>
                                     </select>
                                 </div>
                                 

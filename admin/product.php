@@ -1,8 +1,46 @@
+<script>
+    function delItem(name){
+        return confirm('Bạn muốn xóa sản phẩm ' +name+ ' ?');
+    }
+</script>
 <?php
     if(!defined('SECURITY')){
         header("location:index.php");
     }
-    $sql = "SELECT * FROM product JOIN category ON product.cat_id = category.cat_id ORDER BY prd_id DESC";
+    if(isset($_GET['page'])){
+        $page = $_GET['page'];
+    }else{
+        $page = 1;
+    }
+    $row_per_page = 5;
+    $row_page = $page * $row_per_page - $row_per_page;
+    $query1 = mysqli_query($con, "SELECT * FROM product");
+    $total_row = mysqli_num_rows($query1);
+    $page_num = ceil($total_row / $row_per_page);
+
+    $list_page = '';
+    //page previous
+    $page_pre = $page - 1;
+    if($page_pre <= 0){
+        $page_pre = 1;
+    }
+    $list_page .= '<li class="page-item"><a class="page-link" href="index.php?page_layout=product&page='. $page_pre .'">&laquo;</a></li>';
+    //page 1,2,3...
+    for($i = 1; $i <= $page_num; $i++){
+        if($i == $page){
+            $active = 'active';
+        }else{
+            $active = '';
+        }
+        $list_page .= '<li class="page-item '. $active .'"><a class="page-link" href="index.php?page_layout=product&page=' . $i .'">' . $i .'</a></li>';
+    }
+    //page next
+    $page_next = $page + 1;
+    if($page_next > $page_num){
+        $page_next = $page_num;
+    }
+    $list_page .= '<li class="page-item"><a class="page-link" href="index.php?page_layout=product&page='. $page_next .'">&raquo;</a></li>';
+    $sql = "SELECT * FROM product JOIN category ON product.cat_id = category.cat_id ORDER BY prd_id DESC LIMIT $row_page,$row_per_page";
     $query = mysqli_query($con, $sql);
 ?>
 	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">			
@@ -19,7 +57,7 @@
 			</div>
 		</div><!--/.row-->
 		<div id="toolbar" class="btn-group">
-            <a href="product-add.html" class="btn btn-success">
+            <a href="index.php?page_layout=add_product" class="btn btn-success">
                 <i class="glyphicon glyphicon-plus"></i> Thêm sản phẩm
             </a>
         </div>
@@ -60,8 +98,8 @@
                                         <td><span class="label <?php echo $label;?>"><?php echo $status; ?></span></td>
                                         <td><?php echo $row['cat_name'];?></td>
                                         <td class="form-group">
-                                            <a href="product-edit.html" class="btn btn-primary"><i class="glyphicon glyphicon-pencil"></i></a>
-                                            <a href="product-edit.html" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
+                                            <a href="index.php?page_layout=edit_product&id=<?php echo $row['prd_id'];?>" class="btn btn-primary"><i class="glyphicon glyphicon-pencil"></i></a>
+                                            <a onclick="return delItem('<?php echo $row['prd_name'];?>')" href="delete_product.php?id=<?php echo $row['prd_id'];?>" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
                                         </td>
                                     </tr>
                                 <?php } ?>
@@ -71,11 +109,7 @@
                     <div class="panel-footer">
                         <nav aria-label="Page navigation example">
                             <ul class="pagination">
-                                <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+                                <?php echo $list_page; ?>
                             </ul>
                         </nav>
                     </div>
