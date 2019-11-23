@@ -27,7 +27,10 @@
 	margin-top:10px;}
 #status{
 	font-weight:bold;
-	color:#5cb85c;}		
+	color:#5cb85c;}	
+#status-fail{
+	font-weight:bold;
+	color:#eb1f27;}		
 #product-body, #comment, #comments-list{
 	margin-top:10px;}	
 #product-body h3{

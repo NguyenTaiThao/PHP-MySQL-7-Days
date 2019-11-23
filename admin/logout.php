@@ -3,5 +3,5 @@
     if(isset($_SESSION['user_mail']) && isset($_SESSION['user_pass'])){
         session_destroy();
     }
-    header('location:login.php');
+    header('location:index.php');
 ?>

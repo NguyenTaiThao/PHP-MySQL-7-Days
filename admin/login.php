@@ -1,6 +1,10 @@
 <?php
-	session_start();
-	include_once("../config/connect.php");
+	if(!defined('SECURITY')){
+		header("location:index.php");
+	}
+?>
+<?php
+	//include_once('../config/connect.php');
 	if(isset($_POST['sbm'])){
 		$user_mail = $_POST['mail'];
 		$user_pass = $_POST['pass'];
