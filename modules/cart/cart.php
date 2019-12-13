@@ -54,44 +54,6 @@
 <!--	End Cart	-->
 
 <!--	Customer Info	-->
-<div id="customer">
-    <form method="post">
-        <div class="row">
-
-            <div id="customer-name" class="col-lg-4 col-md-4 col-sm-12">
-                <input placeholder="Họ và tên (bắt buộc)" type="text" name="name" class="form-control" required>
-            </div>
-            <div id="customer-phone" class="col-lg-4 col-md-4 col-sm-12">
-                <input placeholder="Số điện thoại (bắt buộc)" type="text" name="phone" class="form-control" required>
-            </div>
-            <div id="customer-mail" class="col-lg-4 col-md-4 col-sm-12">
-                <input placeholder="Email (bắt buộc)" type="text" name="mail" class="form-control" required>
-            </div>
-            <div id="customer-add" class="col-lg-12 col-md-12 col-sm-12">
-                <input placeholder="Địa chỉ nhà riêng hoặc cơ quan (bắt buộc)" type="text" name="add"
-                    class="form-control" required>
-            </div>
-
-        </div>
-    </form>
-    <div class="row">
-        <div class="by-now col-lg-6 col-md-6 col-sm-12" onclick="submit_button()" id="frm">
-            <a href="#">
-                <b>Mua ngay</b>
-                <span>Giao hàng tận nơi siêu tốc</span>
-            </a>
-        </div>
-        <div class="by-now col-lg-6 col-md-6 col-sm-12">
-            <a href="#">
-                <b>Trả góp Online</b>
-                <span>Vui lòng call (+84) 0988 550 553</span>
-            </a>
-        </div>
-    </div>
-</div>
-<!--	End Customer Info	-->
-<script>
-    function submit_button(){
-        document.getElementById("frm").submit();
-    }
-</script>
+<?php 
+    include_once("./modules/customer/customer.php");
+?>

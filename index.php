@@ -61,6 +61,9 @@
                             case 'add_cart':
                                 include_once('modules/cart/add_cart.php');
                                 break;
+                            case 'success':
+                                include_once('modules/cart/success.php');
+                                break;
                         }
                     }else{
                         include_once('modules/product/featured.php');

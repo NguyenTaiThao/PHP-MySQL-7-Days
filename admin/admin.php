@@ -81,9 +81,9 @@
             <!-- <li><a href="index.php?page_layout=comment"><svg class="glyph stroked two messages">
                         <use xlink:href="#stroked-two-messages" /></svg> Quản lý bình luận</a></li>
             <li><a href="index.php?page_layout=ads"><svg class="glyph stroked chain">
-                        <use xlink:href="#stroked-chain" /></svg> Quản lý quảng cáo</a></li>
-            <li><a href="index.php?page_layout=setting"><svg class="glyph stroked gear">
-                        <use xlink:href="#stroked-gear" /></svg> Cấu hình</a></li> -->
+                        <use xlink:href="#stroked-chain" /></svg> Quản lý quảng cáo</a></li>-->
+            <li class="<?php if($_GET['page_layout'] == 'order') echo 'active';?>"><a href="index.php?page_layout=order"><svg class="glyph stroked gear">
+            <use xlink:href="#stroked-pencil" /></svg> Order list</a></li> 
         </ul>
 
     </div>
@@ -119,6 +119,9 @@
                     break;
                 case 'edit_category':
                     include_once('edit_category.php');
+                    break;
+                case 'order':
+                    include_once('order.php');
                     break;
             }
         }else{
