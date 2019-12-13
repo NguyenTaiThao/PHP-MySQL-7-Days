@@ -1,5 +1,5 @@
 <?php
-    $sql = "SELECT * FROM order_list  WHERE ord_status = 0 ORDER BY ord_id DESC";
+    $sql = "SELECT * FROM order_list  WHERE ord_status = 1 ORDER BY ord_id DESC";
     $query = mysqli_query($con, $sql);
 ?>
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
@@ -20,8 +20,8 @@
     </div>
     <!--/.row-->
     <div id="toolbar" class="btn-group">
-        <a href="index.php?page_layout=done_order" class="btn btn-success">
-            <i class="glyphicon glyphicon-ok"></i> Các đơn hàng đã xử lý
+        <a href="index.php?page_layout=order&done=1" class="btn btn-danger">
+            <i class="glyphicon glyphicon-remove"></i> Các đơn hàng chưa xử lý
         </a>
     </div>
     <div class="row">
@@ -51,15 +51,15 @@
                                     }
                             ?>
                             <tr>
-                                <td style=""><?php echo $row['ord_id']?></td>
+                            <td style=""><?php echo $row['ord_id']?></td>
                                 <td style=""><?php echo $row['ord_name']?></td>
                                 <td style=""><?php echo $row['ord_phone']?></td>
                                 <td><?php echo number_format($row['ord_total'], 0, '', '.')?> vnd</td>
                                 <td><?php echo $row['ord_date']?></td>
                                 <td><span class="<?php echo $lable ?>"><?php echo $status ?></span></td>
                                 <td class="form-group">
-                                    <a href="index.php?page_layout=complete_order&id=<?php echo $row['ord_id'] ?>"  class="btn btn-primary"><i
-                                            class="glyphicon glyphicon-ok"></i></a>
+                                    <a href="index.php?page_layout=complete_order&id=<?php echo $row['ord_id'] ?>" disabled class="btn btn-primary"><i
+                                            class="glyphicon glyphicon-refresh"></i></a>
                                     <a href="index.php?page_layout=detail_order&id=<?php echo $row['ord_id'] ?>" class="btn btn-danger"><i
                                             class="glyphicon glyphicon-list-alt"></i></a>
                                 </td>

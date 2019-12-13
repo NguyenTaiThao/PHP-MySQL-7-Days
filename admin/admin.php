@@ -82,7 +82,7 @@
                         <use xlink:href="#stroked-two-messages" /></svg> Quản lý bình luận</a></li>
             <li><a href="index.php?page_layout=ads"><svg class="glyph stroked chain">
                         <use xlink:href="#stroked-chain" /></svg> Quản lý quảng cáo</a></li>-->
-            <li class="<?php if($_GET['page_layout'] == 'order') echo 'active';?>"><a href="index.php?page_layout=order"><svg class="glyph stroked gear">
+            <li class="<?php if($_GET['page_layout'] == 'order' || $_GET['page_layout'] == 'done_order' || $_GET['page_layout'] == 'detail_order') echo 'active';?>"><a href="index.php?page_layout=order"><svg class="glyph stroked gear">
             <use xlink:href="#stroked-pencil" /></svg> Order list</a></li> 
         </ul>
 
@@ -123,7 +123,16 @@
                 case 'order':
                     include_once('order.php');
                     break;
-            }
+                case 'complete_order':
+                    include_once('complete_order.php');
+                    break;
+                case 'detail_order':
+                    include_once('detail_order.php');
+                    break;
+                case 'done_order':
+                    include_once('done_order.php');
+                    break;
+        }
         }else{
             include_once('sub_admin.php');
         }
