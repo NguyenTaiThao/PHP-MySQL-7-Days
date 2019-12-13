@@ -14,6 +14,7 @@
 </head>
 <body>
 <?php
+    session_start();
     include_once('config/connect.php');
 ?>
 <div id="header">
@@ -56,6 +57,9 @@
                                 break;
                             case 'product':
                                 include_once('modules/product/product.php');
+                                break;
+                            case 'add_cart':
+                                include_once('modules/cart/add_cart.php');
                                 break;
                         }
                     }else{

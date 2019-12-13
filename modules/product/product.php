@@ -23,7 +23,7 @@
                 <li id="price-number"><?php echo number_format($row['prd_price'], 0, '', '.'); ?></li>
                 <li id="<?php if($row['prd_status'] == 1) echo 'status'; else echo 'status-fail'; ?>"><?php if($row['prd_status'] == 1) echo 'Còn hàng'; else echo 'Hết hàng'; ?></li>
             </ul>
-            <div id="add-cart"><a href="#">Mua ngay</a></div>
+            <div id="add-cart"><a href="index.php?page_layout=add_cart&id=<?php echo $cur_id?>">Mua ngay</a></div>
         </div>
     </div>
     <div id="product-body" class="row">

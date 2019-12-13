@@ -1,7 +1,8 @@
 <?php
 	if(!defined('SECURITY')){
 		header("location:index.php");
-	}
+    }
+    ob_start();
 ?>
 <!DOCTYPE html>
 <html>
